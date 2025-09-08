@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal, Pressable, ScrollView } from 'react-native';
-import { X, MessageCircle, Phone, MapPin, Edit } from 'lucide-react-native';
+import { X, MessageCircle, Phone, MapPin, CreditCard as Edit } from 'lucide-react-native';
 import { Person } from '@/types/Person';
 
 interface PersonDetailModalProps {
