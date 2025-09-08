@@ -5,6 +5,8 @@ import { Search, Plus, Filter } from 'lucide-react-native';
 import { StatusBar } from 'expo-status-bar';
 import { PersonCard } from '@/components/PersonCard';
 import { DotLegend } from '@/components/DotLegend';
+import { AddPersonModal } from '@/components/AddPersonModal';
+import { PersonDetailModal } from '@/components/PersonDetailModal';
 import { usePeople } from '@/hooks/usePeople';
 import { Person } from '@/types/Person';
 
@@ -12,6 +14,8 @@ export default function PeopleTab() {
   const { people, addPerson, updatePerson } = usePeople();
   const [searchVisible, setSearchVisible] = useState(false);
   const [filterDot, setFilterDot] = useState<string | null>(null);
+  const [showAddPersonModal, setShowAddPersonModal] = useState(false);
+  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
 
   const filteredPeople = filterDot 
     ? people.filter(person => person.dotColor === filterDot)
@@ -45,7 +49,10 @@ export default function PeopleTab() {
             <Pressable style={styles.headerButton}>
               <Filter size={20} color="#64748b" />
             </Pressable>
-            <Pressable style={styles.addButton}>
+            <Pressable 
+              style={styles.addButton}
+              onPress={() => setShowAddPersonModal(true)}
+            >
               <Plus size={20} color="#ffffff" />
             </Pressable>
           </View>
@@ -67,6 +74,7 @@ export default function PeopleTab() {
           <PersonCard 
             person={item} 
             onUpdate={(updated) => updatePerson(item.id, updated)}
+            onPress={() => setSelectedPerson(item)}
           />
         )}
         contentContainerStyle={styles.listContent}
@@ -79,6 +87,23 @@ export default function PeopleTab() {
             </Text>
           </View>
         }
+      />
+
+      {/* Add Person Modal */}
+      <AddPersonModal
+        visible={showAddPersonModal}
+        onClose={() => setShowAddPersonModal(false)}
+        onSave={(person) => {
+          addPerson(person);
+          setShowAddPersonModal(false);
+        }}
+      />
+
+      {/* Person Detail Modal */}
+      <PersonDetailModal
+        visible={!!selectedPerson}
+        person={selectedPerson}
+        onClose={() => setSelectedPerson(null)}
       />
     </SafeAreaView>
   );

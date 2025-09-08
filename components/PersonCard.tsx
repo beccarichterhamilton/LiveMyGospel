@@ -6,6 +6,7 @@ import { Person } from '@/types/Person';
 interface PersonCardProps {
   person: Person;
   onUpdate: (person: Partial<Person>) => void;
+  onPress?: () => void;
 }
 
 const dotColors = {
@@ -18,7 +19,7 @@ const dotColors = {
   red: '#ef4444',
 };
 
-export function PersonCard({ person, onUpdate }: PersonCardProps) {
+export function PersonCard({ person, onUpdate, onPress }: PersonCardProps) {
   const dotColor = dotColors[person.dotColor as keyof typeof dotColors];
   const lastContact = person.lastContact ? new Date(person.lastContact) : null;
   const daysSinceContact = lastContact 
@@ -26,7 +27,7 @@ export function PersonCard({ person, onUpdate }: PersonCardProps) {
     : null;
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.content}>
         <View style={styles.leftSection}>
           <View style={[styles.dot, { backgroundColor: dotColor }]} />

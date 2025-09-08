@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, Pressable, Dimensions, Modal } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react-native';
 import { StatusBar } from 'expo-status-bar';
-import { CalendarView } from '@/components/CalendarView';
+import { DayViewCalendar } from '@/components/DayViewCalendar';
+import { MonthViewCalendar } from '@/components/MonthViewCalendar';
 import { EventModal } from '@/components/EventModal';
+import { EventTypeSelector } from '@/components/EventTypeSelector';
 import { useEvents } from '@/hooks/useEvents';
 import { Event } from '@/types/Event';
 
@@ -13,11 +15,37 @@ export default function PlannerTab() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewMode, setViewMode] = useState<'day' | 'week' | 'month'>('week');
   const [showEventModal, setShowEventModal] = useState(false);
+  const [showEventTypeSelector, setShowEventTypeSelector] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedHour, setSelectedHour] = useState<number | null>(null);
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
-    setShowEventModal(true);
+    if (viewMode === 'day') {
+      setShowEventTypeSelector(true);
+    } else {
+      setShowEventModal(true);
+    }
+  };
+
+  const handleTimeSlotPress = (hour: number) => {
+    setSelectedHour(hour);
+    setShowEventTypeSelector(true);
+  };
+
+  const handleEventTypeSelect = (eventType: { label: string; color: string }) => {
+    const event: Omit<Event, 'id'> = {
+      title: '',
+      date: selectedDate,
+      startTime: selectedHour ? `${selectedHour}:00` : '9:00 AM',
+      endTime: selectedHour ? `${selectedHour + 1}:00` : '10:00 AM',
+      type: eventType.label,
+      color: eventType.color,
+      notes: '',
+      preNotes: '',
+      postNotes: '',
+    };
+    addEvent(event);
   };
 
   const handleAddEvent = (event: Omit<Event, 'id'>) => {
@@ -91,12 +119,29 @@ export default function PlannerTab() {
       </View>
 
       {/* Calendar */}
-      <CalendarView
-        currentDate={currentDate}
-        viewMode={viewMode}
-        events={events}
-        onDateSelect={handleDateSelect}
-      />
+      {viewMode === 'day' && (
+        <DayViewCalendar
+          date={currentDate}
+          events={events}
+          onEventPress={(event) => console.log('Event pressed:', event)}
+          onTimeSlotPress={handleTimeSlotPress}
+          onEventUpdate={(eventId, updates) => console.log('Update event:', eventId, updates)}
+        />
+      )}
+      
+      {viewMode === 'week' && (
+        <View style={styles.placeholder}>
+          <Text style={styles.placeholderText}>Week View Coming Soon</Text>
+        </View>
+      )}
+      
+      {viewMode === 'month' && (
+        <MonthViewCalendar
+          currentDate={currentDate}
+          events={events}
+          onDateSelect={handleDateSelect}
+        />
+      )}
 
       {/* Add Event Button */}
       <Pressable
@@ -112,6 +157,13 @@ export default function PlannerTab() {
         selectedDate={selectedDate}
         onClose={() => setShowEventModal(false)}
         onSave={handleAddEvent}
+      />
+
+      {/* Event Type Selector */}
+      <EventTypeSelector
+        visible={showEventTypeSelector}
+        onClose={() => setShowEventTypeSelector(false)}
+        onSelect={handleEventTypeSelect}
       />
     </SafeAreaView>
   );
@@ -199,5 +251,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 8,
+  },
+  placeholder: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  placeholderText: {
+    fontSize: 18,
+    color: '#94a3b8',
+    fontWeight: '500',
   },
 });
