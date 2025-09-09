@@ -151,7 +151,7 @@ export default function HomeTab() {
                   <Text style={styles.actionBadgeText}>17</Text>
                 </View>
               </Pressable>
-            </Pressable>
+            </View>
           </View>
         </View>
 
