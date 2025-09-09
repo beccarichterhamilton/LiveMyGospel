@@ -27,7 +27,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          href: "/",
+          href: ".",
           tabBarIcon: ({ size, color }) => (
             <Home size={size} color={color} />
           ),
@@ -37,7 +37,7 @@ export default function TabLayout() {
         name="planner"
         options={{
           title: 'Planner',
-          href: "/planner",
+          href: "planner",
           tabBarIcon: ({ size, color }) => (
             <Calendar size={size} color={color} />
           ),
@@ -47,7 +47,7 @@ export default function TabLayout() {
         name="people"
         options={{
           title: 'People',
-          href: "/people",
+          href: "people",
           tabBarIcon: ({ size, color }) => (
             <Users size={size} color={color} />
           ),
@@ -57,7 +57,7 @@ export default function TabLayout() {
         name="pmg13"
         options={{
           title: 'PMG 13',
-          href: "/pmg13",
+          href: "pmg13",
           tabBarIcon: ({ size, color }) => (
             <Heart size={size} color={color} />
           ),
@@ -67,7 +67,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: 'Settings',
-          href: "/settings",
+          href: "settings",
           tabBarIcon: ({ size, color }) => (
             <Settings size={size} color={color} />
           ),
