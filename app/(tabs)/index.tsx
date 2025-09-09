@@ -102,12 +102,15 @@ export default function HomeTab() {
           <View style={styles.actionItems}>
             <View style={styles.actionRow}>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>👥</Text>
                 </View>
                 <Text style={styles.actionLabel}>Referrals</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>📋</Text>
                 </View>
@@ -115,34 +118,44 @@ export default function HomeTab() {
                 <View style={styles.actionBadge}>
                   <Text style={styles.actionBadgeText}>17</Text>
                 </View>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>📝</Text>
                 </View>
                 <Text style={styles.actionLabel}>Unreported</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>📄</Text>
                 </View>
                 <Text style={styles.actionLabel}>Quick Notes</Text>
+               </View>
               </Pressable>
             </View>
             <View style={styles.actionRow}>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>👤</Text>
                 </View>
                 <Text style={styles.actionLabel}>Follow Up</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>💝</Text>
                 </View>
                 <Text style={styles.actionLabel}>Nurture</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>💡</Text>
                 </View>
@@ -150,6 +163,7 @@ export default function HomeTab() {
                 <View style={styles.actionBadge}>
                   <Text style={styles.actionBadgeText}>17</Text>
                 </View>
+               </View>
               </Pressable>
             </View>
           </View>
@@ -161,28 +175,36 @@ export default function HomeTab() {
           <View style={styles.actionItems}>
             <View style={styles.actionRow}>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>📖</Text>
                 </View>
                 <Text style={styles.actionLabel}>Area Notes</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>🏛️</Text>
                 </View>
                 <Text style={styles.actionLabel}>Units</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>📱</Text>
                 </View>
                 <Text style={styles.actionLabel}>Send Inspiration</Text>
+               </View>
               </Pressable>
               <Pressable style={styles.actionItem}>
+               <View>
                 <View style={styles.actionIcon}>
                   <Text style={styles.actionIconText}>👥</Text>
                 </View>
                 <Text style={styles.actionLabel}>Missionaries</Text>
+               </View>
               </Pressable>
             </View>
           </View>
